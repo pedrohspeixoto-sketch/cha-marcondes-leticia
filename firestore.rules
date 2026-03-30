@@ -1,0 +1,33 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Mensagens de presentes — somente criacao publica, com validacao
+    match /mensagens/{docId} {
+      allow create: if
+        // presente_id obrigatorio (string nao vazia)
+        request.resource.data.presente_id is string &&
+        request.resource.data.presente_id.size() > 0 &&
+
+        // nome_convidado opcional (string, pode ser vazio)
+        request.resource.data.nome_convidado is string &&
+
+        // mensagem: string, max 500 caracteres
+        request.resource.data.mensagem is string &&
+        request.resource.data.mensagem.size() <= 500 &&
+
+        // timestamp obrigatorio (server timestamp)
+        request.resource.data.timestamp == request.time;
+
+      // Bloqueia leitura, atualizacao e exclusao publicas.
+      // O casal acessa os dados pelo Firebase Console.
+      allow read, update, delete: if false;
+    }
+
+    // Bloqueia qualquer outra colecao
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

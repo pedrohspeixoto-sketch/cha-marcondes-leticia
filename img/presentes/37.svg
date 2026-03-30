@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" rx="8" fill="#F9E2AF"/>
+  <text x="200" y="130" text-anchor="middle" font-family="sans-serif" font-size="48">🏠</text>
+  <text x="200" y="190" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="600" fill="#333">Vaso Decorativo</text>
+  <text x="200" y="220" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#666">Sala / Decoração</text>
+</svg>
