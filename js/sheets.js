@@ -6,7 +6,7 @@
  */
 
 const SHEETS_CONFIG = {
-  url: 'COLE_A_URL_DO_APPS_SCRIPT_AQUI'
+  url: 'https://script.google.com/macros/s/AKfycby-ACSYQJErD-ydVIgDzJ1_oEV3SbV_-IS7XOF2hmO30mxtOw1yoT8RiVV8Z4UnxN1t/exec'
 };
 
 /**
