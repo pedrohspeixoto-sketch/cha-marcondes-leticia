@@ -94,7 +94,7 @@ function mostrarFormulario(id) {
 
     <div class="form-group">
       <label for="nome-convidado">Seu nome <span class="opcional">(opcional)</span></label>
-      <input type="text" id="nome-convidado" placeholder="Como você quer ser identificado(a)?">
+      <input type="text" id="nome-convidado" placeholder="Como você quer ser identificado(a)?" maxlength="100">
     </div>
 
     <div class="form-group">
@@ -156,8 +156,8 @@ function mostrarPix(id) {
       Mensagem enviada com sucesso!
     </div>
 
-    <button class="btn-voltar" onclick="abrirModal(${p.id})" style="margin-top:1rem;">
-      Voltar para presentes
+    <button class="btn-voltar" onclick="mostrarFormulario(${p.id})" style="margin-top:1rem;">
+      Voltar
     </button>
   `;
 

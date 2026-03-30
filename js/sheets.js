@@ -31,6 +31,10 @@ async function salvarMensagem(data) {
       return { success: false, error: 'Mensagem inválida (máximo 500 caracteres).' };
     }
 
+    if (typeof data.nome_convidado === 'string' && data.nome_convidado.length > 100) {
+      return { success: false, error: 'Nome inválido (máximo 100 caracteres).' };
+    }
+
     const response = await fetch(SHEETS_CONFIG.url, {
       method: 'POST',
       mode: 'no-cors',

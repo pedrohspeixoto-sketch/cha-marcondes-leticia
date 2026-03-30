@@ -13,6 +13,20 @@
  * 8. Copie a URL gerada e cole em js/sheets.js no SHEETS_CONFIG.url
  */
 
+/**
+ * Previne formula injection em células da planilha.
+ * Prefixes perigosos (=, +, -, @, \t, \r) são neutralizados com apóstrofo.
+ * Limita tamanho a 500 caracteres.
+ */
+function sanitizeCell(value) {
+  if (value === null || value === undefined) return '';
+  var str = String(value).substring(0, 500);
+  if (/^[=+\-@\t\r]/.test(str)) {
+    str = "'" + str;
+  }
+  return str;
+}
+
 function doPost(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
@@ -31,13 +45,13 @@ function doPost(e) {
       sheet.getRange(1, 1, 1, 5).setFontWeight('bold');
     }
 
-    // Adiciona a linha com os dados
+    // Adiciona a linha com os dados (sanitizados contra formula injection)
     sheet.appendRow([
       new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
-      data.presente_nome || '',
-      data.valor || '',
-      data.nome_convidado || 'Anônimo',
-      data.mensagem || ''
+      sanitizeCell(data.presente_nome),
+      sanitizeCell(data.valor),
+      sanitizeCell(data.nome_convidado || 'Anônimo'),
+      sanitizeCell(data.mensagem)
     ]);
 
     return ContentService
